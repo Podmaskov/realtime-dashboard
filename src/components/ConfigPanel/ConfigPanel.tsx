@@ -2,10 +2,12 @@ import {
   selectEnabledWidgets,
   selectRefreshIntervalMs,
   selectSetRefreshIntervalMs,
+  selectSetTimeRangeMs,
+  selectTimeRangeMs,
   selectToggleWidget,
   useDashboardStore,
 } from '../../store'
-import { REFRESH_INTERVALS_MS, SENSOR_TYPES } from '../../types'
+import { REFRESH_INTERVALS_MS, SENSOR_TYPES, TIME_RANGES_MS } from '../../types'
 import { SENSOR_META } from '../../utils/sensorMeta'
 import { Toggle } from '../Toggle/Toggle'
 import styles from './ConfigPanel.module.css'
@@ -15,6 +17,8 @@ export function ConfigPanel() {
   const toggleWidget = useDashboardStore(selectToggleWidget)
   const refreshIntervalMs = useDashboardStore(selectRefreshIntervalMs)
   const setRefreshIntervalMs = useDashboardStore(selectSetRefreshIntervalMs)
+  const timeRangeMs = useDashboardStore(selectTimeRangeMs)
+  const setTimeRangeMs = useDashboardStore(selectSetTimeRangeMs)
 
   return (
     <aside className={styles.panel}>
@@ -54,6 +58,23 @@ export function ConfigPanel() {
           }}
           aria-label="Refresh interval in seconds"
         />
+      </section>
+
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Time range</h3>
+        <div className={styles.segmented}>
+          {TIME_RANGES_MS.map((ms) => (
+            <button
+              key={ms}
+              type="button"
+              className={styles.segment}
+              aria-pressed={ms === timeRangeMs}
+              onClick={() => setTimeRangeMs(ms)}
+            >
+              {ms / 60000} min
+            </button>
+          ))}
+        </div>
       </section>
     </aside>
   )
