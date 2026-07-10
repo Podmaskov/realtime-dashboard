@@ -1,10 +1,60 @@
+import {
+  selectEnabledWidgets,
+  selectRefreshIntervalMs,
+  selectSetRefreshIntervalMs,
+  selectToggleWidget,
+  useDashboardStore,
+} from '../../store'
+import { REFRESH_INTERVALS_MS, SENSOR_TYPES } from '../../types'
+import { SENSOR_META } from '../../utils/sensorMeta'
+import { Toggle } from '../Toggle/Toggle'
 import styles from './ConfigPanel.module.css'
 
 export function ConfigPanel() {
+  const enabledWidgets = useDashboardStore(selectEnabledWidgets)
+  const toggleWidget = useDashboardStore(selectToggleWidget)
+  const refreshIntervalMs = useDashboardStore(selectRefreshIntervalMs)
+  const setRefreshIntervalMs = useDashboardStore(selectSetRefreshIntervalMs)
+
   return (
     <aside className={styles.panel}>
       <h2 className={styles.title}>Settings</h2>
-      <p className={styles.placeholder}>Configuration coming soon</p>
+
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Widgets</h3>
+        <div className={styles.toggles}>
+          {SENSOR_TYPES.map((type) => (
+            <Toggle
+              key={type}
+              label={SENSOR_META[type].label}
+              checked={enabledWidgets[type]}
+              onChange={() => toggleWidget(type)}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h3 className={styles.sectionTitle}>Refresh interval</h3>
+          <span className={styles.intervalValue}>
+            {refreshIntervalMs / 1000}s
+          </span>
+        </div>
+        <input
+          type="range"
+          className={styles.slider}
+          min={0}
+          max={REFRESH_INTERVALS_MS.length - 1}
+          step={1}
+          value={REFRESH_INTERVALS_MS.indexOf(refreshIntervalMs)}
+          onChange={(event) => {
+            const next = REFRESH_INTERVALS_MS[Number(event.target.value)]
+            if (next) setRefreshIntervalMs(next)
+          }}
+          aria-label="Refresh interval in seconds"
+        />
+      </section>
     </aside>
   )
 }
