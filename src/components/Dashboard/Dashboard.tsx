@@ -1,12 +1,11 @@
 import { Card } from '../Card/Card'
+import { TemperatureWidget } from '../TemperatureWidget/TemperatureWidget'
 import styles from './Dashboard.module.css'
 
 export function Dashboard() {
   return (
     <div className={styles.grid}>
-      <Card title="Temperature">
-        <p className={styles.placeholder}>—</p>
-      </Card>
+      <TemperatureWidget />
       <Card title="Humidity">
         <p className={styles.placeholder}>—</p>
       </Card>
