@@ -20,17 +20,17 @@ export function PressureWidget() {
   return (
     <Card title={label}>
       {items ? (
-        <dl className={styles.stats}>
+        <div className={styles.stats}>
           {items.map(({ key, value }) => (
             <div key={key} className={styles.stat}>
-              <dt className={styles.label}>{key}</dt>
-              <dd className={styles.value}>
+              <span className={styles.label}>{key}</span>
+              <span className={styles.value}>
                 {value}
                 <span className={styles.unit}>{unit}</span>
-              </dd>
+              </span>
             </div>
           ))}
-        </dl>
+        </div>
       ) : (
         <p className={styles.placeholder}>Waiting for data…</p>
       )}

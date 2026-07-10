@@ -8,19 +8,27 @@ export function getLatestReading(
   return readings.findLast((reading) => reading.type === type)
 }
 
+export function getAllReadingsInWindow(
+  readings: SensorData[],
+  windowMs: number,
+): SensorData[] {
+  const cutoff = Date.now() - windowMs
+  return readings.filter(
+    (reading) => new Date(reading.timestamp).getTime() >= cutoff,
+  )
+}
+
 export function getReadingsInWindow(
   readings: SensorData[],
   type: SensorType,
   windowMs: number,
 ): SensorData[] {
-  const cutoff = Date.now() - windowMs
-  return readings.filter(
-    (reading) =>
-      reading.type === type && new Date(reading.timestamp).getTime() >= cutoff,
+  return getAllReadingsInWindow(readings, windowMs).filter(
+    (reading) => reading.type === type,
   )
 }
 
-export interface ChartPoint {
+interface ChartPoint {
   time: number
   value: number
 }
@@ -42,23 +50,10 @@ export function computeStats(readings: SensorData[]): SensorStats | null {
     min: roundTo(Math.min(...values), 2),
     max: roundTo(Math.max(...values), 2),
     avg: roundTo(sum / values.length, 2),
-    count: values.length,
   }
 }
 
-export function getAllReadingsInWindow(
-  readings: SensorData[],
-  windowMs: number,
-): SensorData[] {
-  const cutoff = Date.now() - windowMs
-  return readings.filter(
-    (reading) => new Date(reading.timestamp).getTime() >= cutoff,
-  )
-}
-
-export type CombinedPoint = { time: number } & Partial<
-  Record<SensorType, number>
->
+type CombinedPoint = { time: number } & Partial<Record<SensorType, number>>
 
 export function toCombinedChartPoints(readings: SensorData[]): CombinedPoint[] {
   const byTime = new Map<number, CombinedPoint>()

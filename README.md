@@ -17,13 +17,6 @@ npm run dev
 
 Then open the link from the terminal (usually http://localhost:5173).
 
-## Scripts
-
-- `npm run build` – build the app for production
-- `npm run preview` – run the built app
-- `npm run lint` – check the code
-- `npm run format` – format the code
-
 ## Features
 
 - Temperature: shows the latest value.
@@ -40,7 +33,7 @@ Then open the link from the terminal (usually http://localhost:5173).
   are read with selector functions.
 - **Recharts** – easy charts for the humidity graph.
 - **CSS Modules** – each component has its own styles. Colors and spacing use
-  CSS variables, with a light and dark theme.
+  CSS variables.
 - **Mock API** – fake data that changes smoothly, with a 10% chance of an error
   to test the error handling.
 

@@ -1,9 +1,9 @@
-import type { SensorData } from '../types'
+import { TIME_RANGES_MS, type SensorData } from '../types'
 import type { RootStore, StoreSlice } from './store'
 
-// Keep at most the largest selectable window (10 min) of readings, so changing
-// the view range never drops data we already collected.
-const MAX_HISTORY_MS = 10 * 60 * 1000
+// Keep at most the largest selectable window of readings, so changing the view
+// range never drops data we already collected.
+const MAX_HISTORY_MS = Math.max(...TIME_RANGES_MS)
 
 export type SensorDataSlice = {
   readings: SensorData[]

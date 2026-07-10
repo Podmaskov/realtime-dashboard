@@ -13,5 +13,4 @@ export interface SensorStats {
   min: number
   max: number
   avg: number
-  count: number
 }
