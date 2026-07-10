@@ -1,4 +1,6 @@
 export * from './Card/Card'
+export * from './ChartTooltip/ChartTooltip'
 export * from './ConfigPanel/ConfigPanel'
 export * from './Dashboard/Dashboard'
+export * from './HumidityWidget/HumidityWidget'
 export * from './TemperatureWidget/TemperatureWidget'
