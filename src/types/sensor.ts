@@ -1,4 +1,6 @@
-export type SensorType = 'temperature' | 'humidity' | 'pressure'
+export const SENSOR_TYPES = ['temperature', 'humidity', 'pressure'] as const
+
+export type SensorType = (typeof SENSOR_TYPES)[number]
 
 export interface SensorData {
   id: number

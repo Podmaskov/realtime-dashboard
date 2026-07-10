@@ -1,0 +1,1 @@
+export { fetchSensorData } from './mockSensorApi'
