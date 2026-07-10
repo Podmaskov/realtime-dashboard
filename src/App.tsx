@@ -1,4 +1,4 @@
-import { ConfigPanel, Dashboard } from './components'
+import { ConfigPanel, Dashboard, ErrorToast } from './components'
 import { useRealtimeSensorData } from './hooks'
 import styles from './App.module.css'
 
@@ -16,6 +16,7 @@ function App() {
           <Dashboard />
         </main>
       </div>
+      <ErrorToast />
     </div>
   )
 }
