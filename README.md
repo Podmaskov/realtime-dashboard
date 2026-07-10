@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+# Real-Time Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dashboard that shows live sensor data: temperature, humidity, and pressure.
+The data comes from a mock API and updates every few seconds.
 
-Currently, two official plugins are available:
+## What you need
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 20+ (22 is best)
+- npm
 
-## React Compiler
+## How to run
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the link from the terminal (usually http://localhost:5173).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `npm run build` – build the app for production
+- `npm run preview` – run the built app
+- `npm run lint` – check the code
+- `npm run format` – format the code
+
+## Features
+
+- Temperature: shows the latest value.
+- Humidity: shows a line chart of the last minutes.
+- Pressure: shows the min, max, and average.
+- Side panel: turn widgets on or off, and change the update speed (1–5 seconds).
+- Error message: a small toast shows when the API fails. It hides by itself.
+
+## Main choices
+
+- **React + TypeScript + Vite** – fast start and strict types (no `any`).
+- **Zustand** – a small and simple store. It is split into slices, and values
+  are read with selector functions.
+- **Recharts** – easy charts for the humidity graph.
+- **CSS Modules** – each component has its own styles. Colors and spacing use
+  CSS variables, with a light and dark theme.
+- **Mock API** – fake data that changes smoothly, with a 10% chance of an error
+  to test the error handling.
+
+## Folders
+
+```text
+src/
+  api/         mock API and data generator
+  components/  UI parts (widgets, panel, toast)
+  hooks/       data hooks (polling and computed data)
+  store/       Zustand store (slices and selectors)
+  types/       shared types
+  utils/       helpers (stats, config, time)
 ```
