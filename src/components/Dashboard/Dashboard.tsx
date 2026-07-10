@@ -1,4 +1,5 @@
 import { selectEnabledWidgets, useDashboardStore } from '../../store'
+import { CombinedWidget } from '../CombinedWidget/CombinedWidget'
 import { HumidityWidget } from '../HumidityWidget/HumidityWidget'
 import { PressureWidget } from '../PressureWidget/PressureWidget'
 import { TemperatureWidget } from '../TemperatureWidget/TemperatureWidget'
@@ -17,6 +18,7 @@ export function Dashboard() {
       {enabledWidgets.temperature && <TemperatureWidget />}
       {enabledWidgets.humidity && <HumidityWidget />}
       {enabledWidgets.pressure && <PressureWidget />}
+      {enabledWidgets.combined && <CombinedWidget />}
     </div>
   )
 }

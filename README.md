@@ -29,6 +29,7 @@ Then open the link from the terminal (usually http://localhost:5173).
 - Temperature: shows the latest value.
 - Humidity: shows a line chart of the last minutes.
 - Pressure: shows the min, max, and average.
+- Combined chart: shows a few sensors together, with buttons to choose the types.
 - Side panel: turn widgets on or off, set the update speed (1–5 seconds), and set the chart time range (1, 5, or 10 minutes).
 - Error message: a small toast shows when the API fails. It hides by itself.
 

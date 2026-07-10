@@ -7,8 +7,7 @@ import {
   selectToggleWidget,
   useDashboardStore,
 } from '../../store'
-import { REFRESH_INTERVALS_MS, SENSOR_TYPES, TIME_RANGES_MS } from '../../types'
-import { SENSOR_META } from '../../utils/sensorMeta'
+import { REFRESH_INTERVALS_MS, TIME_RANGES_MS, WIDGETS } from '../../types'
 import { Toggle } from '../Toggle/Toggle'
 import styles from './ConfigPanel.module.css'
 
@@ -27,12 +26,12 @@ export function ConfigPanel() {
       <section className={styles.section}>
         <h3 className={styles.sectionTitle}>Widgets</h3>
         <div className={styles.toggles}>
-          {SENSOR_TYPES.map((type) => (
+          {WIDGETS.map((widget) => (
             <Toggle
-              key={type}
-              label={SENSOR_META[type].label}
-              checked={enabledWidgets[type]}
-              onChange={() => toggleWidget(type)}
+              key={widget.id}
+              label={widget.label}
+              checked={enabledWidgets[widget.id]}
+              onChange={() => toggleWidget(widget.id)}
             />
           ))}
         </div>

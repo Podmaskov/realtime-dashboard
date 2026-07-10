@@ -13,7 +13,12 @@ export type SettingsSlice = DashboardSettings & {
 }
 
 const initialSettings: DashboardSettings = {
-  enabledWidgets: { temperature: true, humidity: true, pressure: true },
+  enabledWidgets: {
+    temperature: true,
+    humidity: true,
+    pressure: true,
+    combined: false,
+  },
   refreshIntervalMs: 2000,
   timeRangeMs: 300_000,
 }

@@ -1,6 +1,11 @@
-import type { SensorType } from './sensor'
+export const WIDGETS = [
+  { id: 'temperature', label: 'Temperature' },
+  { id: 'humidity', label: 'Humidity' },
+  { id: 'pressure', label: 'Pressure' },
+  { id: 'combined', label: 'Combined' },
+] as const
 
-export type WidgetId = SensorType
+export type WidgetId = (typeof WIDGETS)[number]['id']
 
 export const REFRESH_INTERVALS_MS = [1000, 2000, 3000, 4000, 5000] as const
 

@@ -45,3 +45,31 @@ export function computeStats(readings: SensorData[]): SensorStats | null {
     count: values.length,
   }
 }
+
+export function getAllReadingsInWindow(
+  readings: SensorData[],
+  windowMs: number,
+): SensorData[] {
+  const cutoff = Date.now() - windowMs
+  return readings.filter(
+    (reading) => new Date(reading.timestamp).getTime() >= cutoff,
+  )
+}
+
+export type CombinedPoint = { time: number } & Partial<
+  Record<SensorType, number>
+>
+
+export function toCombinedChartPoints(readings: SensorData[]): CombinedPoint[] {
+  const byTime = new Map<number, CombinedPoint>()
+  for (const reading of readings) {
+    const time = new Date(reading.timestamp).getTime()
+    let point = byTime.get(time)
+    if (!point) {
+      point = { time }
+      byTime.set(time, point)
+    }
+    point[reading.type] = reading.value
+  }
+  return [...byTime.values()]
+}
